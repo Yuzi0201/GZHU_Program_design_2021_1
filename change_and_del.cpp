@@ -33,7 +33,6 @@ int change_and_del::readstudentfile()
     {
         QString line=in.readLine();
         score_line.append(line);
-//        qDebug()<<line;
     }
     file.close();
     return 0;

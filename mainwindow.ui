@@ -92,6 +92,75 @@
      <string>改动后请点击刷新按钮</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>15</y>
+      <width>58</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>排序：</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="sortway">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>10</y>
+      <width>87</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>数学正序</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>数学倒序</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>C++正序</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>C++倒序</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QPushButton" name="sort">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>10</y>
+      <width>88</width>
+      <height>34</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>排序</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="histogram_Button">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>10</y>
+      <width>88</width>
+      <height>34</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>直方图</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

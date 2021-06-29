@@ -7,6 +7,8 @@
 #include "QDebug"
 #include <addstu.h>
 #include <change_and_del.h>
+#include "QStringList"
+#include <histogram.h>
 
 QString name1;
 QString age1;
@@ -44,10 +46,12 @@ MainWindow::MainWindow(QWidget *parent)
         this->close();
         QMessageBox::critical(this,"错误","文件读取失败，无法进行查找","确认");
     }
+    QFile::copy("student.txt","student_old.txt");
 }
 
 MainWindow::~MainWindow()
 {
+    QFile::remove("student_old.txt");
     delete ui;
 }
 
@@ -86,13 +90,19 @@ void MainWindow::on_add_student_clicked()
 
 void MainWindow::on_buttonBox_rejected()
 {
-    this->close();
+    int ret=QMessageBox::question(this,"请确认","确定要不保存数据而关闭吗？","确认","取消");
+    if(ret==0)
+    {
+        QFile::remove("student.txt");
+        QFile::rename("student_old.txt","student.txt");
+        this->close();
+    }
 }
 
 
 void MainWindow::on_buttonBox_accepted()
 {
-
+    this->close();
 }
 
 int MainWindow::readstudentfile()
@@ -108,20 +118,17 @@ int MainWindow::readstudentfile()
     {
         QString line=in.readLine();
         score_line.append(line);
-//        qDebug()<<line;
     }
     file.close();
     return 0;
 }
+
 
 void MainWindow::on_pushButton_clicked()
 {
     this->model->clear();
     reset();
     readstudentfile();
-    //int flag=this->ui->cbb_querymode->currentIndex();
-    //QString infor=this->ui->le_info->text();
-//            qDebug()<<flag;
             int i=0,row=0;
             for (i=0;i<score_line.length();i++)
             {
@@ -145,5 +152,35 @@ void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)
     change_and_del a;
 
     a.exec();
+}
+
+
+void MainWindow::on_sort_clicked()
+{
+    on_pushButton_clicked();
+    int flag=this->ui->sortway->currentIndex();
+    switch (flag) {
+    case 0:
+        model->sort(4,Qt::DescendingOrder);
+        break;
+    case 1:
+        model->sort(4,Qt::AscendingOrder);
+        break;
+    case 2:
+        model->sort(5,Qt::DescendingOrder);
+        break;
+    case 3:
+        model->sort(5,Qt::AscendingOrder);
+        break;
+    default:
+        break;
+    }
+}
+
+
+void MainWindow::on_histogram_Button_clicked()
+{
+    histogram h;
+    h.exec();
 }
 
