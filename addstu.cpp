@@ -28,18 +28,27 @@ void addstu::on_buttonBox_accepted()
 
     QString info=number+" "+name+" "+gender+" "+age+" "+math+" "+cpp;
 
+    bool charge=name.length()<1||number.length()<1||gender.length()<1||
+                age.length()<1||math.length()<1||cpp.length()<1;
 
-    QFile mFile("student.txt");
-    if(!mFile.open(QIODevice::Append|QIODevice::Text))
+    if(charge==1)
     {
-        QMessageBox::critical(this,"错误","文件打开失败，信息没有写入","确认");
+        QMessageBox::critical(this,"错误","信息填写不完整，请检查","确定");
+    }
+    else
+    {
+        QFile mFile("student.txt");
+        if(!mFile.open(QIODevice::Append|QIODevice::Text))
+        {
+            QMessageBox::critical(this,"错误","文件打开失败，信息没有写入","确认");
+            return;
+        }
+        QTextStream out(&mFile);
+        out<<info<<"\n";
+        mFile.flush();
+        mFile.close();
         return;
     }
-    QTextStream out(&mFile);
-    out<<info<<"\n";
-    mFile.flush();
-    mFile.close();
-    return;
 }
 
 

@@ -6,6 +6,14 @@
 #include <QStandardItem>
 #include <QStandardItemModel>
 
+extern QString name1;
+extern QString age1;
+extern QString num1;
+extern QString gender1;
+extern QString math1;
+extern QString cpp1;
+
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -30,6 +38,8 @@ private slots:
     void on_buttonBox_accepted();
 
     void on_pushButton_clicked();
+
+    void on_tableView_doubleClicked(const QModelIndex &index);
 
 private:
     Ui::MainWindow *ui;

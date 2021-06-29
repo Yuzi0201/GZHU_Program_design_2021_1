@@ -6,6 +6,7 @@
 #include "QTextStream"
 #include "QDebug"
 #include <addstu.h>
+#include <change_and_del.h>
 
 QString name1;
 QString age1;
@@ -32,12 +33,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->ui->tableView->setModel(model);
 
-    this->ui->tableView->setColumnWidth(0,120);
-    this->ui->tableView->setColumnWidth(1,80);
-    this->ui->tableView->setColumnWidth(2,80);
-    this->ui->tableView->setColumnWidth(3,80);
-    this->ui->tableView->setColumnWidth(4,80);
-    this->ui->tableView->setColumnWidth(5,80);
+    this->ui->tableView->setColumnWidth(0,140);
+    this->ui->tableView->setColumnWidth(1,130);
+    this->ui->tableView->setColumnWidth(2,100);
+    this->ui->tableView->setColumnWidth(3,100);
+    this->ui->tableView->setColumnWidth(4,100);
+    this->ui->tableView->setColumnWidth(5,105);
     if(readstudentfile()==-1)
     {
         this->close();
@@ -59,12 +60,12 @@ void MainWindow::reset()
     this->model->setHorizontalHeaderItem(3,new QStandardItem("年龄"));
     this->model->setHorizontalHeaderItem(4,new QStandardItem("高数"));
     this->model->setHorizontalHeaderItem(5,new QStandardItem("C++"));
-    this->ui->tableView->setColumnWidth(0,120);
-    this->ui->tableView->setColumnWidth(1,80);
-    this->ui->tableView->setColumnWidth(2,80);
-    this->ui->tableView->setColumnWidth(3,80);
-    this->ui->tableView->setColumnWidth(4,80);
-    this->ui->tableView->setColumnWidth(5,80);
+    this->ui->tableView->setColumnWidth(0,140);
+    this->ui->tableView->setColumnWidth(1,115);
+    this->ui->tableView->setColumnWidth(2,100);
+    this->ui->tableView->setColumnWidth(3,100);
+    this->ui->tableView->setColumnWidth(4,100);
+    this->ui->tableView->setColumnWidth(5,100);
 }
 
 void MainWindow::display(int row, QStringList score_line)
@@ -129,5 +130,20 @@ void MainWindow::on_pushButton_clicked()
                 QStringList linesplit=line.split(" ");
                         display(row++, linesplit);
             }
+}
+
+
+void MainWindow::on_tableView_doubleClicked(const QModelIndex &index)
+{
+    int row=this->ui->tableView->currentIndex().row();
+    num1=model->data(model->index(row,0)).toString();
+    name1=model->data(model->index(row,1)).toString();
+    gender1=model->data(model->index(row,2)).toString();
+    age1=model->data(model->index(row,3)).toString();
+    math1=model->data(model->index(row,4)).toString();
+    cpp1=model->data(model->index(row,5)).toString();
+    change_and_del a;
+
+    a.exec();
 }
 

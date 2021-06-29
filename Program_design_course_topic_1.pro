@@ -10,15 +10,18 @@ CONFIG += c++11
 
 SOURCES += \
     addstu.cpp \
+    change_and_del.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     addstu.h \
+    change_and_del.h \
     mainwindow.h
 
 FORMS += \
     addstu.ui \
+    change_and_del.ui \
     mainwindow.ui
 
 # Default rules for deployment.
