@@ -160,6 +160,19 @@ void change_and_del::on_buttonBox_accepted()
                     out<<line+"\n";
                     file.close();
                 }
+               else
+               {
+                   QFile file("student_temp.txt");
+                   if(!file.open(QIODevice::Append|QIODevice::Text))
+                   {
+                       QMessageBox::critical(this,"错误","文件打开失败，信息没有修改","确认");
+                       return;
+                   }
+                   QTextStream out(&file);
+                   out<<info+"\n";
+                   file.flush();
+                   file.close();
+               }
              }
          QFile file_old("student.txt");
          QFile file_new("student_temp.txt");
@@ -167,7 +180,6 @@ void change_and_del::on_buttonBox_accepted()
          {
            file_old.remove();
            file_new.rename("student.txt");
-           writeIn(info);
          }
          else
          {
